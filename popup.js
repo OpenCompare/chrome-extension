@@ -6,8 +6,16 @@
 // This block is new!
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if( request.message === "open_new_tab" ) {
-            chrome.tabs.create({"url": request.url});
+        if( request.message === "convert_to_editor" ) {
+
+            var fd = new FormData();
+            var blob = new Blob([request.table], {type: "text/html"});
+            fd.append("file", blob);
+            fd.append('title', 'Test');
+            fd.append('productAsLines', true);
+            var req = new XMLHttpRequest();
+            req.open("POST", "http://localhost:9000/api/import/html");
+            req.send(fd);
         }
     }
 );
