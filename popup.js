@@ -6,6 +6,7 @@
 // This block is new!
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
+
         if( request.message === "convert_to_editor" ) {
 
             var fd = new FormData();
@@ -24,7 +25,8 @@ chrome.runtime.onMessage.addListener(
                         var activeTab = tabs[0];
                         chrome.tabs.sendMessage(activeTab.id, {
                             "message": "replace_table",
-                            "id": req.responseText
+                            "id": req.responseText,
+                            "tableIndex": request.index
                         });
                     });
                 }
