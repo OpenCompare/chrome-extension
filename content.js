@@ -23,7 +23,6 @@ chrome.runtime.onMessage.addListener(
 
             for(var index = 0; index < tables.length; index++) {
                 var table = tables[index];
-                console.log(table);
 
                 var button = document.createElement("button");
                 button.setAttribute("class", "waves-effect waves-light btn");
@@ -47,7 +46,6 @@ chrome.runtime.onMessage.addListener(
                 var parentDiv = tables[index].parentNode;
                 parentDiv.insertBefore(button, tables[index]);
             }
-            console.log(tables.length);
         }
 
         if( request.message === "remove_buttons" ) {
@@ -56,7 +54,7 @@ chrome.runtime.onMessage.addListener(
         }
 
             if( request.message === "replace_table" ) {
-                var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=false&enableTitle=false&enableShare=false" ' +
+                var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=false&enableTitle=false&enableShare=false&deleteAfterLoaded=true" ' +
                     'scrolling="no"  width="100%" height="600px" style="border:none;"></iframe>';
 
                 tables.eq(request.tableIndex).replaceWith(editor);
