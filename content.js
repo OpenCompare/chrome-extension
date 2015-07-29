@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(
             });
 
 
-             tables =$("table");
+            tables =$("table");
 
             for(var index = 0; index < tables.length; index++) {
                 var table = tables[index];
@@ -49,8 +49,6 @@ chrome.runtime.onMessage.addListener(
                         "message": "convert_to_editor",
                         "table": tables[id].outerHTML,
                         "index": id
-                    }, function(response){
-                        console.log(response);
                     });
                 });
                 var buttonContent = document.createTextNode("Replace this table");
@@ -66,10 +64,10 @@ chrome.runtime.onMessage.addListener(
         }
 
         if( request.message === "replace_table" ) {
-                var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=false&enableTitle=false&enableShare=false&deleteAfterLoaded=true" ' +
-                    'scrolling="no"  width="100%" height="600px" style="border:none;"></iframe>';
+            var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=false&enableTitle=false&enableShare=false&deleteAfterLoaded=true" ' +
+                'scrolling="no"  width="100%" height="600px" style="border:none;"></iframe>';
 
-                tables.eq(request.tableIndex).replaceWith(editor);
+            tables.eq(request.tableIndex).replaceWith(editor);
         }
         else if( request.message === "store_find_button" ) {
             findingTables = true;
