@@ -1,7 +1,7 @@
 /**
  * Created by hvallee on 7/23/15.
  */
-
+var tables;
 chrome.runtime.onMessage.addListener(
 
     function(request, sender, sendResponse) {
@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(
                 $("body").append(editor);
             }
 
-            var tables =$("table");
+             tables =$("table");
 
             for(var index = 0; index < tables.length; index++) {
                 var table = tables[index];
@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener(
                 var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=false&enableTitle=false&enableShare=false" ' +
                     'scrolling="no"  width="100%" height="600px" style="border:none;"></iframe>';
 
-                $("table").eq(request.tableIndex).replaceWith(editor);
+                tables.eq(request.tableIndex).replaceWith(editor);
         }
     }
 );
