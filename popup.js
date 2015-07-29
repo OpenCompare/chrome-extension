@@ -1,11 +1,27 @@
 /**
  * Created by hvallee on 7/23/15.
  */
+var background = chrome.extension.getBackgroundPage();
 
 document.addEventListener('DOMContentLoaded', function() {
 
     $(document).ready(function(){
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            var activeTab = tabs[0];
+
+            chrome.tabs.sendMessage(activeTab.id, {
+                "message": "get_find_button"
+            }, function(response) {
+                if(response) {
+                    document.getElementById('checkPage').style.display = 'none';
+                    document.getElementById('uncheckPage').style.display = 'block';
+                }
+            });
+        });
         $( '#gotIt' ).click(function() {
+            chrome.runtime.sendMessage({
+                "message": "store_gotIt_button"
+            });
             $( '#message' ).hide();
         });
     });
@@ -19,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('uncheckPage').style.display = 'block';
             var activeTab = tabs[0];
             chrome.tabs.sendMessage(activeTab.id, {"message": "find_tables"});
+            chrome.tabs.sendMessage(activeTab.id, {
+                "message": "store_find_button"
+            });
         });
 
     }, false);

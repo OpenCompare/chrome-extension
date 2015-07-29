@@ -1,11 +1,14 @@
 /**
  * Created by hvallee on 7/28/15.
  */
+
+var gotIt = false;
+
 chrome.runtime.onMessage.addListener(
 
     function(request, sender, sendResponse) {
         if( request.message === "convert_to_editor" ) {
-
+            sendResponse({called: "I got it !"});
             var fd = new FormData();
             var blob = new Blob([request.table], {type: "text/html"});
             fd.append("file", blob);
@@ -28,6 +31,12 @@ chrome.runtime.onMessage.addListener(
                     });
                 }
             }
+        }
+        else if( request.message === "store_gotIt_button" ) {
+            gotIt = true
+        }
+        else if( request.message === "get_gotIt_button" ) {
+            sendResponse(gotIt);
         }
     }
 );

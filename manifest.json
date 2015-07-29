@@ -9,8 +9,8 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["eventPage.js"],
-    "persistent": false
+    "scripts": ["backgroundPage.js"],
+    "persistent": true
   },
   "content_scripts": [
     {
