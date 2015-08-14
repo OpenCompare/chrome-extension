@@ -64,8 +64,8 @@ chrome.runtime.onMessage.addListener(
         }
 
         if( request.message === "replace_table" ) {
-            var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=false&enableTitle=false&enableShare=false&deleteAfterLoaded=true" ' +
-                'scrolling="no"  width="100%" height="600px" style="border:none;"></iframe>';
+            var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=true&enableExport=false&enableTitle=false&enableShare=true&deleteAfterLoaded=true" ' +
+                'scrolling="auto"  width="100%" height="700px" style="border:none;"></iframe>';
 
             tables.eq(request.tableIndex).replaceWith(editor);
         }
