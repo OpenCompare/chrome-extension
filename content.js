@@ -64,7 +64,7 @@ chrome.runtime.onMessage.addListener(
         }
 
         if( request.message === "replace_table" ) {
-            var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=true&enableExport=false&enableTitle=false&enableShare=true&deleteAfterLoaded=true" ' +
+            var editor = '<iframe src="http://localhost:9000/embedPCM/' + request.id + '?enableEdit=false&enableExport=true&enableTitle=false&enableShare=true&deleteAfterLoaded=true" ' +
                 'scrolling="auto"  width="100%" height="700px" style="border:none;"></iframe>';
 
             tables.eq(request.tableIndex).replaceWith(editor);
