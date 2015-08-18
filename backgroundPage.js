@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(
             fd.append('title', 'Test');
             fd.append('productAsLines', true);
             var req = new XMLHttpRequest();
-            req.open("POST", "http://localhost:9000/api/embedFromHtml");
+            req.open("POST", "http://opencompare.org/api/embedFromHtml");
             req.send(fd);
 
             req.onreadystatechange=function(){
