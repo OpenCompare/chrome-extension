@@ -32,6 +32,31 @@ chrome.runtime.onMessage.addListener(
                 }
             }
         }
+        else if( request.message === "open_in_opencompare" ) {
+            sendResponse({called: "I got it !"});
+            var fd = new FormData();
+            var blob = new Blob([request.table], {type: "text/html"});
+            fd.append("file", blob);
+            fd.append('title', 'Test');
+            fd.append('productAsLines', true);
+            var req = new XMLHttpRequest();
+            req.open("POST", "http://opencompare.org/api/embedFromHtml");
+            req.send(fd);
+
+            req.onreadystatechange=function(){
+                if (req.readyState==4 && req.status==200){
+                    // Send a message to the active tab
+                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        var activeTab = tabs[0];
+                        chrome.tabs.sendMessage(activeTab.id, {
+                            "message": "open_tab",
+                            "id": req.responseText,
+                            "tableIndex": request.index
+                        });
+                    });
+                }
+            }
+        }
         else if( request.message === "store_gotIt_button" ) {
             gotIt = true
         }
