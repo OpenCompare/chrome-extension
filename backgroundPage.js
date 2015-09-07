@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(
             var fd = new FormData();
             var blob = new Blob([request.table], {type: "text/html"});
             fd.append("file", blob);
-            fd.append('title', '');
+            fd.append('title', 'Imported from extension');
             fd.append('productAsLines', true);
             var req = new XMLHttpRequest();
             req.open("POST", "http://opencompare.org/api/embedFromHtml");
