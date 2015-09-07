@@ -4,7 +4,8 @@
 
 var tables;
 var findingTables = false;
-
+//var ocServer = "opencompare.org";
+var ocServer = "localhost:9000";
 
 chrome.runtime.onMessage.addListener(
 
@@ -89,13 +90,13 @@ chrome.runtime.onMessage.addListener(
         }
 
         if( request.message === "replace_table" ) {
-            var editor = '<iframe src="http://opencompare.org/embedPCM/' + request.id + '?enableEdit=false&enableExport=true&enableTitle=false&enableShare=true&deleteAfterLoaded=true" ' +
+            var editor = '<iframe src="http://' + ocServer + '/embedPCM/' + request.id + '?enableEdit=false&enableExport=true&enableTitle=false&enableShare=true&deleteAfterLoaded=true" ' +
                 'scrolling="auto"  width="'+tables.eq(request.tableIndex).width()+'" height="'+tables.eq(request.tableIndex).height()+'" style="border:none;"></iframe>';
 
             tables.eq(request.tableIndex).replaceWith(editor);
         }
         else if( request.message === "open_tab" ) {
-            window.open('http://opencompare.org/pcm/' + request.id + '?deleteAfterLoaded=true', '_blank');
+            window.open('http://' + ocServer + '/pcm/' + request.id + '?deleteAfterLoaded=true', '_blank');
         }
         else if( request.message === "store_find_button" ) {
             findingTables = true;

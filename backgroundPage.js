@@ -3,6 +3,8 @@
  */
 
 var gotIt = false;
+//var ocServer = "opencompare.org";
+var ocServer = "localhost:9000";
 
 chrome.runtime.onMessage.addListener(
 
@@ -15,7 +17,7 @@ chrome.runtime.onMessage.addListener(
             fd.append('title', 'Test');
             fd.append('productAsLines', true);
             var req = new XMLHttpRequest();
-            req.open("POST", "http://opencompare.org/api/embedFromHtml");
+            req.open("POST", "http://" + ocServer + "/api/embedFromHtml");
             req.send(fd);
 
             req.onreadystatechange=function(){
@@ -40,7 +42,7 @@ chrome.runtime.onMessage.addListener(
             fd.append('title', 'Imported from extension');
             fd.append('productAsLines', true);
             var req = new XMLHttpRequest();
-            req.open("POST", "http://opencompare.org/api/embedFromHtml");
+            req.open("POST", "http://" + ocServer + "/api/embedFromHtml");
             req.send(fd);
 
             req.onreadystatechange=function(){
