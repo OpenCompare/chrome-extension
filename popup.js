@@ -26,13 +26,6 @@
         });
 
 
-        document.querySelector('#gotIt').click(function() {
-            chrome.runtime.sendMessage({
-                "message": "store_gotIt_button"
-            });
-            //document.querySelector('#message').hide(); // TODO : convert hide to pure JS
-        });
-
         var checkPageButton = document.getElementById('checkPage');
         checkPageButton.addEventListener('click', function() {
             document.getElementById('checkPage').style.display = 'none';
@@ -42,7 +35,6 @@
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 var activeTab = tabs[0];
                 chrome.tabs.sendMessage(activeTab.id, {"message": "find_tables"});
-                //chrome.tabs.sendMessage(activeTab.id, {"message": "store_find_button"});
             });
 
         }, false);
@@ -62,15 +54,4 @@
         }, false);
     }, false);
 
-    chrome.runtime.onMessage.addListener(
-        function(request, sender, sendResponse) {
-            if (request.message === "displayHttpsInstructions") {
-                //document.querySelector('#message').show(); // TODO : convert show to pure JS
-            }
-            if (request.message === "hideHttpsInstructions") {
-                //document.querySelector('#message').hide(); // TODO : convert hide to pure JS
-            }
-
-        }
-    );
 })();
